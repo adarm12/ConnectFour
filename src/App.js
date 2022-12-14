@@ -1,70 +1,62 @@
 import './App.css';
 import React from "react";
+import Circle from "./Circle";
+import DropButton from "./DropButton";
 
 class App extends React.Component {
+
+
+    state = {
+
+        board: [[0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,1,0,0],
+            [0,0,0,0,2,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [<DropButton index={"0"} propForUpdateBoard = {this.updateBoard}/>,
+                <DropButton index={"1"}/>,
+                <DropButton index={"2"}/>,
+                <DropButton index={"3"}/>,
+                <DropButton index={"4"}/>,
+                <DropButton index={"5"}/>,
+                <DropButton index={"6"}/>]],
+
+        currentPlayer: 1
+    };
+
+    updateBoard = (newBoard) => {
+        this.setState({
+            board: newBoard
+        })
+    }
+
+
+
     render() {
         return (
-            <div>
-                <table style={{alignItems: "center"}}>
+            <div className="App">
 
-                    <tr>1
-                        <td>A</td>
-                        <td>A</td>
-                        <td>A</td>
-                        <td>A</td>
-                        <td>A</td>
-                        <td>A</td>
-                        <td>A</td>
-                    </tr>
-                    <tr>2
-                        <td>A</td>
-                        <td>A</td>
-                        <td>A</td>
-                        <td>A</td>
-                        <td>A</td>
-                        <td>A</td>
-                        <td>A</td>
-                    </tr>
-                    <tr>3
-                        <td>A</td>
-                        <td>A</td>
-                        <td>A</td>
-                        <td>A</td>
-                        <td>A</td>
-                        <td>A</td>
-                        <td>A</td>
-                    </tr>
-                    <tr>4
-                        <td>A</td>
-                        <td>A</td>
-                        <td>A</td>
-                        <td>A</td>
-                        <td>A</td>
-                        <td>A</td>
-                        <td>A</td>
-                    </tr>
-                    <tr>5
-                        <td>A</td>
-                        <td>A</td>
-                        <td>A</td>
-                        <td>A</td>
-                        <td>A</td>
-                        <td>A</td>
-                        <td>A</td>
-                    </tr>
-                    <tr>6
-                        <td>b</td>
-                        <td>b</td>
-                        <td>b</td>
-                        <td>b</td>
-                        <td>b</td>
-                        <td>b</td>
-                        <td>b</td>
-                    </tr>
+                <table style={{alignItems: "center"}}>
+                    {this.state.board.map((row,index) => {
+                        return (
+                            <tr>
+                                {row.map((cell, cellIndex) => {
+                                    return (
+                                        <td>
+                                            {cell===0?" ":
+                                                (cell===1? <Circle color = "red"/>:
+                                                    (cell===2? <Circle color = "blue"/>: cell))}
+                                        </td>
+                                    )
+                                })}
+                            </tr>
+                        )
+
+                    })}
 
                 </table>
             </div>
-
         );
     }
 }
