@@ -6,6 +6,7 @@ function Circle(props) {
             <circle style={{backgroundColor: props.color}}/>
         </div>
     );
+
 }
 
 export default Circle;
