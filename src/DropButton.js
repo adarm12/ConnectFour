@@ -3,7 +3,6 @@ function DropButton(props){
         <button>
             drop
         </button>
-
     )
 }
 
