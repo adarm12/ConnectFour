@@ -5,7 +5,7 @@ function DropButton(props){
 
 
     return (
-        <button onClick={ props.propForUpdateBoard()}>
+        <button>
             drop
         </button>
     )

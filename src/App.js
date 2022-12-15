@@ -14,7 +14,7 @@ class App extends React.Component {
             [0,0,0,0,2,0,0],
             [0,0,0,0,0,0,0],
             [0,0,0,0,0,0,0],
-            [<DropButton index={"0"} propForUpdateBoard = {this.updateBoard}/>,
+            [<DropButton index={"0"}/>,
                 <DropButton index={"1"}/>,
                 <DropButton index={"2"}/>,
                 <DropButton index={"3"}/>,
