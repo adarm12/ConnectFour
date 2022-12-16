@@ -10,27 +10,31 @@ class App extends React.Component {
 
         board: [[0,0,0,0,0,0,0],
             [0,0,0,0,0,0,0],
-            [0,0,0,0,1,0,0],
-            [0,0,0,0,2,0,0],
             [0,0,0,0,0,0,0],
             [0,0,0,0,0,0,0],
-            [<DropButton index={"0"}/>,
-                <DropButton index={"1"}/>,
-                <DropButton index={"2"}/>,
-                <DropButton index={"3"}/>,
-                <DropButton index={"4"}/>,
-                <DropButton index={"5"}/>,
-                <DropButton index={"6"}/>]],
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [["button"],["button"],["button"],["button"],["button"],["button"],["button"]]],
 
         currentPlayer: 1
     };
 
-    updateBoard = (newBoard) => {
-        this.setState({
-            board: newBoard
-        })
+    drop = (index) => {
+        let newBoard = this.state.board;
+        let i;
+        for (i=this.state.board.length-1; i>=0; i--) {
+            if (newBoard[i][index] === 0) {
+                break;
+            }
+        }
+        if (i>=0) {
+            newBoard[i][index] = this.state.currentPlayer;
+            this.setState({
+                board: newBoard,
+                currentPlayer: (this.state.currentPlayer === 1 ? 2 : 1)
+            })
+        }
     }
-
 
 
     render () {
@@ -46,7 +50,10 @@ class App extends React.Component {
                                         <td>
                                             {cell===0?" ":
                                                 (cell===1? <Circle color = "red"/>:
-                                                    (cell===2? <Circle color = "blue"/>: cell))}
+                                                    (cell===2? <Circle color = "blue"/>:
+                                                        <DropButton
+                                                            index={cellIndex}
+                                                            dropCircle = {this.drop}/>))}
                                         </td>
                                     )
                                 })}
