@@ -1,6 +1,6 @@
 function DropButton(props){
     return (
-        <button>
+        <button onClick={() => props.dropCircle(props.index)}>
             drop
         </button>
     )

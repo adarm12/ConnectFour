@@ -1,10 +1,10 @@
 import './App.css';
 import React from "react";
-import Connect4 from "./Connect4";
 import Circle from "./Circle";
 import DropButton from "./DropButton";
 
 class App extends React.Component {
+
 
     state = {
 
@@ -22,7 +22,7 @@ class App extends React.Component {
                 <DropButton index={"5"}/>,
                 <DropButton index={"6"}/>]],
 
-        currentPlayer: 1,
+        currentPlayer: 1
     };
 
     updateBoard = (newBoard) => {
@@ -36,7 +36,7 @@ class App extends React.Component {
     render () {
         return (
             <div className="App">
-                <Connect4></Connect4>
+
                 <table style={{alignItems: "center"}}>
                     {this.state.board.map((row,index) => {
                         return (
@@ -44,15 +44,17 @@ class App extends React.Component {
                                 {row.map((cell, cellIndex) => {
                                     return (
                                         <td>
-                                            {cell===0? <Circle color = "white"/>:
+                                            {cell===0?" ":
                                                 (cell===1? <Circle color = "red"/>:
-                                                    (cell===2? <Circle color = "orange"/>: cell))}
+                                                    (cell===2? <Circle color = "blue"/>: cell))}
                                         </td>
                                     )
                                 })}
                             </tr>
                         )
+
                     })}
+
                 </table>
             </div>
         );
