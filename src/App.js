@@ -6,7 +6,6 @@ import GameRules from "./GameRules";
 
 class App extends React.Component {
 
-
     // index = מס' עמודה
     //cell = השחקן (הצבע)
     // row = מערך השורה בעצם כללל השורה
