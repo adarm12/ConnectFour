@@ -45,6 +45,7 @@ class App extends React.Component {
 
         return (
             <div className="App">
+                <h1> connect-4  </h1>
                 <table>
                     {this.state.board.map((row, rowIndex) => {
                         return (
