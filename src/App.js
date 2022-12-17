@@ -66,41 +66,29 @@ class App extends React.Component {
         }
     }
 
-    checkDiagonalRight = (rowIndex, cellIndex, cellColor) => {
-        let counter = 0;
-        // for (let row = rowIndex; row > rowIndex - 4 && row < this.state.board.length; row--) {
-        //     for (let col = cellIndex; col <= cellIndex + 4 && col < this.state.board[rowIndex].length; col++) {
-        //         if (this.state.board[rowIndex][cellIndex] === cellColor) {
-        //             counter++
-        //             this.win(counter, cellColor)
-        //         }
-        //     }
-        // }
-        // for (let row = rowIndex, col = cellIndex;
-        //      row < 7 || col < 7;
-        //      row-- , col++) {
-        //     if (this.state.board[rowIndex][cellIndex] === cellColor) {
-        //         counter++
-        //         this.win(counter, cellColor)
-        //     }
-        // }
-    }
+    refresh = () => {
+        window.location.reload();
+    };
 
     win = (counter, color) => {
         if (counter === 4) {
-            if (color === 1)
-            alert("red win")
-            if (color === 2)
-                alert("orange win")
+            if (color === 1) {
+                alert("אדום ניצח לחץ אישור למשחק חדש")
+                this.refresh()
+            }
+            if (color === 2) {
+                alert("כתום ניצח לחץ אישור למשחק חדש")
+                this.refresh()
+            }
         }
     }
 
     render() {
-
         return (
             <div className="App">
                 <h1> Connect-4 </h1>
-                <table style={{alignItems: "center"}}>
+                <button onClick={this.refresh}> משחק חדש </button>
+                <table>
                     {this.state.board.map((row, index) => {
                         return (
                             <tr>
@@ -109,10 +97,6 @@ class App extends React.Component {
                                         <td>
                                             <cell
                                                 player={this.state.currentPlayer}
-                                                // value={this.state.values[rowIndex][cellIndex]}
-                                                // row={rowIndex}
-                                                // cell={cellIndex}
-                                                // cellClicked={this.cellClicked}
                                             />
                                             {cell === 0 ? <Circle color="white"/> :
                                                 (cell === 1 ? <Circle color="red"/> :
@@ -124,7 +108,6 @@ class App extends React.Component {
                                                     ))}
                                             {this.checkRow(index, cellIndex, cell)}
                                             {this.checkCol(index, cellIndex, cell)}
-                                            {this.checkDiagonalRight(index, cellIndex, cell)}
                                         </td>
                                     )
                                 })}

@@ -9,14 +9,13 @@ h1 {
 table {
     background: #1a1a97;
     text-align-all: center;
-    align-items: center;
     font-size: 50px;
     margin: auto;
     border: 20px black;
 }
 
 th, td {
-    width: 100px;
+    width: 80px;
     height: 60px;
     text-align: center;
     border: 1px solid black;
@@ -26,6 +25,10 @@ th, td {
 button {
     width: 50px;
     height: 30px;
+}
+
+div.button {
+    /*margin: auto;*/
 }
 
 Circle {
