@@ -17,8 +17,16 @@ class App extends React.Component {
             [0, 0, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0, 0],
             [["button"], ["button"], ["button"], ["button"], ["button"], ["button"], ["button"]]],
-        currentPlayer: 1
-    };
+        currentPlayer: 1,
+        player1: {
+            color: "red"
+
+        },
+        player2: {
+            color: "orange"
+
+        }
+    }
 
     drop = (index) => {
 
