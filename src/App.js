@@ -5,6 +5,7 @@ import DropButton from "./DropButton";
 
 class App extends React.Component {
 
+
     state = {
         board: [[0, 0, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0, 0],
@@ -17,6 +18,7 @@ class App extends React.Component {
     };
 
     drop = (index) => {
+
         let newBoard = this.state.board;
         let i;
         for (i = this.state.board.length - 1; i >= 0; i--) {
@@ -32,6 +34,7 @@ class App extends React.Component {
             })
         }
     }
+
 
     render() {
         return (
@@ -52,7 +55,6 @@ class App extends React.Component {
                                                             index={cellIndex}
                                                             dropCircle={this.drop}
                                                         />))}
-
                                         </td>
                                     )
                                 })}
