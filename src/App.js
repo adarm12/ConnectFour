@@ -2,7 +2,6 @@ import './App.css';
 import React from "react";
 import Circle from "./Circle";
 import DropButton from "./DropButton";
-import GameRules from "./GameRules";
 
 class App extends React.Component {
 
@@ -12,12 +11,11 @@ class App extends React.Component {
     // row = מערך השורה בעצם כללל השורה
     state = {
         board: [[0, 0, 0, 0, 0, 0, 0],
-            // [0, 0, 0, 0, 0, 0, 0],
-            // [0, 0, 0, 0, 0, 0, 0],
-            // [0, 0, 0, 0, 0, 0, 0],
-            // [0, 0, 0, 0, 0, 0, 0],
-            // [0, 0, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0, 0],
+            // [0, 0, 0, 0, 0, 0, 0],
+            // [0, 0, 0, 0, 0, 0, 0],
+            // [0, 0, 0, 0, 0, 0, 0],
+            // [0, 0, 0, 0, 0, 0, 0],
             [["button"], ["button"], ["button"], ["button"], ["button"], ["button"], ["button"]]],
         currentPlayer: 1
     };
@@ -35,18 +33,29 @@ class App extends React.Component {
             newBoard[i][index] = this.state.currentPlayer;
             this.setState({
                 board: newBoard,
-                currentPlayer: (this.state.currentPlayer === 1 ? 2 : 1)
+                currentPlayer: (this.state.currentPlayer === 1 ? 1 : 1)
             })
+        }
+    }
+
+    check = (rowIndex, cellIndex) => {
+        let counter = 0;
+        for (let i = cellIndex; i < cellIndex + 4 && i < this.state.board[rowIndex].length; i++) {
+            if (this.state.board[rowIndex][i] === this.state.currentPlayer) {
+                counter++
+            }
+            if (counter === 4)
+                alert("red win")
         }
     }
 
 
     render() {
-
         return (
             <div className="App">
-                <table>
-                    {this.state.board.map((row, rowIndex) => {
+                <h1> Connect-4 </h1>
+                <table style={{alignItems: "center"}}>
+                    {this.state.board.map((row, index) => {
                         return (
                             <tr>
                                 {row.map((cell, cellIndex) => {
@@ -55,17 +64,20 @@ class App extends React.Component {
                                             <cell
                                                 player={this.state.currentPlayer}
                                             />
-                                            {cell === 0 ? <Circle color="white"/> : (cell === 1 ?
-                                                <Circle color="red"/> :
-                                                (cell === 2 ? <Circle color="orange"/> :
-                                                    <DropButton
-                                                        index={cellIndex}
-                                                        dropCircle={this.drop}
-                                                    />))}
+                                            {cell === 0 ? <Circle color="white"/> :
+                                                (cell === 1 ? <Circle color="red"/> :
+                                                    (cell === 2 ? <Circle color="orange"/> :
+                                                            <DropButton
+                                                                index={cellIndex}
+                                                                dropCircle={this.drop}
+                                                            />
+                                                    ))}
+                                            {this.check(index,cellIndex)}
                                         </td>
                                     )
                                 })}
                             </tr>
+
                         )
                     })}
                 </table>
