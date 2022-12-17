@@ -2,16 +2,21 @@ import './App.css';
 import React from "react";
 import Circle from "./Circle";
 import DropButton from "./DropButton";
+import GameRules from "./GameRules";
 
 class App extends React.Component {
 
 
+    // index = מס' עמודה
+    //cell = השחקן (הצבע)
+    // row = מערך השורה בעצם כללל השורה
     state = {
         board: [[0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0],
+            // [0, 0, 0, 0, 0, 0, 0],
+            // [0, 0, 0, 0, 0, 0, 0],
+            // [0, 0, 0, 0, 0, 0, 0],
+            // [0, 0, 0, 0, 0, 0, 0],
+            // [0, 0, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0, 0],
             [["button"], ["button"], ["button"], ["button"], ["button"], ["button"], ["button"]]],
         currentPlayer: 1
@@ -37,24 +42,26 @@ class App extends React.Component {
 
 
     render() {
+
         return (
             <div className="App">
-                <h1> Connect-4 </h1>
-                <table style={{alignItems: "center"}}>
-                    {this.state.board.map((row, index) => {
+                <table>
+                    {this.state.board.map((row, rowIndex) => {
                         return (
                             <tr>
                                 {row.map((cell, cellIndex) => {
                                     return (
                                         <td>
-                                            {/*{console.log("r " + row,"c " + cell,"i " + cellIndex)}*/}
-                                            {cell === 0 ? <Circle color="white"/> :
-                                                (cell === 1 ? <Circle color="red"/> :
-                                                    (cell === 2 ? <Circle color="orange"/> :
-                                                        <DropButton
-                                                            index={cellIndex}
-                                                            dropCircle={this.drop}
-                                                        />))}
+                                            <cell
+                                                player={this.state.currentPlayer}
+                                            />
+                                            {cell === 0 ? <Circle color="white"/> : (cell === 1 ?
+                                                <Circle color="red"/> :
+                                                (cell === 2 ? <Circle color="orange"/> :
+                                                    <DropButton
+                                                        index={cellIndex}
+                                                        dropCircle={this.drop}
+                                                    />))}
                                         </td>
                                     )
                                 })}
