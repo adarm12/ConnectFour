@@ -12,10 +12,10 @@ class App extends React.Component {
     state = {
         board: [[0, 0, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0, 0],
-            // [0, 0, 0, 0, 0, 0, 0],
-            // [0, 0, 0, 0, 0, 0, 0],
-            // [0, 0, 0, 0, 0, 0, 0],
-            // [0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0],
             [["button"], ["button"], ["button"], ["button"], ["button"], ["button"], ["button"]]],
         currentPlayer: 1
     };
@@ -33,22 +33,29 @@ class App extends React.Component {
             newBoard[i][index] = this.state.currentPlayer;
             this.setState({
                 board: newBoard,
-                currentPlayer: (this.state.currentPlayer === 1 ? 1 : 1)
+                currentPlayer: (this.state.currentPlayer === 1 ? 2 : 1)
             })
         }
     }
 
-    check = (rowIndex, cellIndex) => {
+    checkRow = (rowIndex, cellIndex, cellColor) => {
         let counter = 0;
         for (let i = cellIndex; i < cellIndex + 4 && i < this.state.board[rowIndex].length; i++) {
-            if (this.state.board[rowIndex][i] === this.state.currentPlayer) {
+            if (this.state.board[rowIndex][i] === cellColor) {
                 counter++
+                this.win(counter, cellColor)
             }
-            if (counter === 4)
-                alert("red win")
         }
     }
 
+    win = (counter, color) => {
+        if (counter === 4) {
+            if (color === 1)
+                alert("red win")
+            if (color === 2)
+                alert("orange win")
+        }
+    }
 
     render() {
 
@@ -73,12 +80,11 @@ class App extends React.Component {
                                                                 dropCircle={this.drop}
                                                             />
                                                     ))}
-                                            {this.check(index,cellIndex)}
+                                            {this.checkRow(index, cellIndex, cell)}
                                         </td>
                                     )
                                 })}
                             </tr>
-
                         )
                     })}
                 </table>
