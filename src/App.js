@@ -2,6 +2,7 @@ import './App.css';
 import React from "react";
 import Circle from "./Circle";
 import DropButton from "./DropButton";
+import GameRules from "./GameRules";
 
 class App extends React.Component {
 
@@ -51,6 +52,7 @@ class App extends React.Component {
 
 
     render() {
+
         return (
             <div className="App">
                 <h1> Connect-4 </h1>
