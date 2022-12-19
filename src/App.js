@@ -38,11 +38,43 @@ class App extends React.Component {
             }
         }
         if (i >= 0) {
+            const color = this.state.currentPlayer;
             newBoard[i][index] = this.state.currentPlayer;
             this.setState({
                 board: newBoard,
                 currentPlayer: (this.state.currentPlayer === 1 ? 2 : 1)
             })
+            this.checkCol(i, index, color)
+            this.checkWinner("row",i, index, color)
+            this.checkWinner("firstDiagonal",i, index, color)
+        }
+
+    }
+
+    checkWinner = (kind, rowIndex, cellIndex, cellColor) => {
+        if (kind === "row") {
+            while (cellIndex>0 && this.state.board[rowIndex][cellIndex-1] === cellColor) {
+                cellIndex--
+            }
+            this.checkRow(rowIndex,cellIndex,cellColor)
+        }
+        if (kind === "firstDiagonal") {   // first diagonal is up left to down right -> \
+            while (cellIndex>0 && rowIndex>0 && this.state.board[rowIndex-1][cellIndex-1] === cellColor) {
+                cellIndex--
+                rowIndex--
+            }
+            this.checkFirstDiagonal(rowIndex,cellIndex,cellColor)
+        }
+
+    }
+
+    checkFirstDiagonal =  (rowIndex, cellIndex, cellColor) => {
+        let counter = 0;
+        for (let col = cellIndex, row = rowIndex; col < cellIndex + 4 && row< rowIndex+4 && col < this.state.board[rowIndex].length && row < this.state.board.length; col++, row++) {
+            if (this.state.board[row][col] === cellColor) {
+                counter++
+                this.win(counter, cellColor)
+            }
         }
     }
 
@@ -58,7 +90,7 @@ class App extends React.Component {
 
     checkCol = (rowIndex, cellIndex, cellColor) => {
         let counter = 0;
-        for (let row = rowIndex; row > rowIndex - 4 && row >= 0; row--) {
+        for (let row = rowIndex; row < rowIndex + 4 && row < this.state.board.length; row++) {
             if (this.state.board[row][cellIndex] === cellColor) {
                 counter++
                 this.win(counter, cellColor)
@@ -106,8 +138,8 @@ class App extends React.Component {
                                                                 dropCircle={this.drop}
                                                             />
                                                     ))}
-                                            {this.checkRow(index, cellIndex, cell)}
-                                            {this.checkCol(index, cellIndex, cell)}
+                                            {/*{this.checkRow(index, cellIndex, cell)}*/}
+
                                         </td>
                                     )
                                 })}
