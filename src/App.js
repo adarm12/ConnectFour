@@ -47,6 +47,7 @@ class App extends React.Component {
             this.checkCol(i, index, color)
             this.checkWinner("row",i, index, color)
             this.checkWinner("firstDiagonal",i, index, color)
+            this.checkWinner("secondDiagonal",i, index, color)
         }
 
     }
@@ -58,14 +59,30 @@ class App extends React.Component {
             }
             this.checkRow(rowIndex,cellIndex,cellColor)
         }
-        if (kind === "firstDiagonal") {   // first diagonal is up left to down right -> \
+        else if (kind === "firstDiagonal") {   // first diagonal is up left to down right -> \
             while (cellIndex>0 && rowIndex>0 && this.state.board[rowIndex-1][cellIndex-1] === cellColor) {
                 cellIndex--
                 rowIndex--
             }
             this.checkFirstDiagonal(rowIndex,cellIndex,cellColor)
         }
+        else if (kind === "secondDiagonal") {   // first diagonal is up left to down right -> /
+            while (cellIndex>0 && rowIndex<=6 && this.state.board[rowIndex+1][cellIndex-1] === cellColor) {
+                cellIndex--
+                rowIndex++
+            }
+            this.checkSecondDiagonal(rowIndex,cellIndex,cellColor)
+        }
 
+    }
+    checkSecondDiagonal =  (rowIndex, cellIndex, cellColor) => {
+        let counter = 0;
+        for (let col = cellIndex, row = rowIndex; col < cellIndex + 4 && row> rowIndex-4 && col < this.state.board[rowIndex].length && row >= 0; col++, row--) {
+            if (this.state.board[row][col] === cellColor) {
+                counter++
+                this.win(counter, cellColor)
+            }
+        }
     }
 
     checkFirstDiagonal =  (rowIndex, cellIndex, cellColor) => {
